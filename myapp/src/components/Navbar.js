@@ -1,12 +1,13 @@
 import React from "react";
 
-export default function Navbar() {
+
+export default function Navbar(props) {
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
-            MyApp
+            {props.title}
           </a>
           <button
             className="navbar-toggler"
@@ -28,10 +29,9 @@ export default function Navbar() {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/">
-                  About
+                  About Us
                 </a>
               </li>
-              
             </ul>
             <form className="d-flex" role="search">
               <input
