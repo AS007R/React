@@ -10,3 +10,6 @@ p{
   font-size: larger;
   color: brown;
 }
+.btn-width{
+  width: 80px;
+}
