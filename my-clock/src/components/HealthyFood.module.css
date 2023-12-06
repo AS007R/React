@@ -1,0 +1,13 @@
+.healthContainer{
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 500px;
+  margin: auto;
+  padding: 10px;
+}
+
+.inputCss{
+  width: 100%;
+  font-size: larger;
+  margin: 15px 0;
+}

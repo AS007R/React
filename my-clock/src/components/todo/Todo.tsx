@@ -1,32 +1,31 @@
+import { useState } from "react";
 import AddTodo from "./AddTodo";
 import TodoItems from "./TodoItems";
+import Welcome from "./Welcome";
 
 function Todo() {
-  const todoItems = [
-    {
-      name: "Project",
-      dueDate: "12/12/2023",
-    },
-    {
-      name: "Water",
-      dueDate: "12/12/2023",
-    },
-    {
-      name: "Milk",
-      dueDate: "12/12/2023",
-    },
-    {
-      name: "Yogurt",
-      dueDate: "12/12/2023",
-    },
-  ];
+  const todoItemsI: any[] = [];
+
+  const [todoItems, setTodoItems] = useState(todoItemsI);
+  const handleAddItem = (todoName: string, todoDate: string) => {
+    const newItems = [...todoItems, { name: todoName, dueDate: todoDate }];
+    setTodoItems(newItems);
+  };
+  const handleDelete = (todoName: string) => {
+    const newItems = todoItems.filter(
+      (item: { name: string; dueDate: string }) => item.name !== todoName
+    );
+    setTodoItems(newItems);
+  };
+
   return (
     <>
       <h1 className="bg-primary-subtle py-2 fw-bold text-primary-emphasis ">
         My Todos
       </h1>
-      <AddTodo />
-      <TodoItems todoList={todoItems} />
+      <AddTodo onAddTodo={handleAddItem} />
+      {todoItems.length === 0 && <Welcome />}
+      <TodoItems todoList={todoItems} onDeleteTodo={handleDelete} />
     </>
   );
 }

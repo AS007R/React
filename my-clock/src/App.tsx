@@ -5,7 +5,7 @@ import Time from "./components/Time";
 import ClockHeading from "./components/ClockHeading";
 import HealthyFood from "./components/HealthyFood";
 import Todo from "./components/todo/Todo";
-import Calculator from "./components/calculator/calculator";
+import Calculator from "./components/calculator/Calculator";
 function App() {
   return (
     <>
