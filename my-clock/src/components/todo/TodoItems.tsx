@@ -5,7 +5,7 @@ type typeTodo = {
 
 type typeTodoProp = {
   todoList: typeTodo[];
-  onDeleteTodo: any;
+  onDeleteTodo: (todoName: string) => void;
 };
 
 function TodoItems({ todoList, onDeleteTodo }: typeTodoProp) {

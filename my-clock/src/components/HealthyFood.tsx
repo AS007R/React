@@ -1,6 +1,10 @@
 "use client";
 import { useState } from "react";
 import styles from "./HealthyFood.module.css";
+import AddFood from "./healthyFood/AddFood";
+import ShowFoods from "./healthyFood/ShowFoods";
+import { HealthyFoodContext } from "../store/HealthyFoodContext";
+
 const HealthyFood = () => {
   const [foods, setFoods] = useState(["Green Vegitables", "Rice", "Milk"]);
 
@@ -28,36 +32,15 @@ const HealthyFood = () => {
   };
 
   return (
-    <div className={styles.healthContainer}>
-      <h1 className="fw-bold ">Healthy Foods</h1>
-      <input
-        className={styles.inputCss}
-        type="text"
-        placeholder="Enter Healthy Food here"
-        onKeyDown={onkeyHandle}
-      />
-      <ul className="list-group">
-        {foods.map((item) => (
-          <li
-            key={item}
-            className={
-              bought.includes(item)
-                ? "list-group-item text-start active"
-                : "list-group-item text-start disable"
-            }
-          >
-            {item}
-            <button
-              type="button"
-              className="btn btn-info float-end"
-              onClick={() => onClickHandle(item)}
-            >
-              Buy
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <HealthyFoodContext.Provider
+      value={{ foods, bought, onClickHandle, onkeyHandle }}
+    >
+      <div className={styles.healthContainer}>
+        <h1 className="fw-bold ">Healthy Foods</h1>
+        <AddFood></AddFood>
+        <ShowFoods></ShowFoods>
+      </div>
+    </HealthyFoodContext.Provider>
   );
 };
 

@@ -2,18 +2,21 @@ import { useState } from "react";
 import AddTodo from "./AddTodo";
 import TodoItems from "./TodoItems";
 import Welcome from "./Welcome";
-
+type typeTodo = {
+  name: string;
+  dueDate: string;
+};
 function Todo() {
-  const todoItemsI: any[] = [];
-
-  const [todoItems, setTodoItems] = useState(todoItemsI);
+  const [todoItems, setTodoItems] = useState<typeTodo[]>([]);
   const handleAddItem = (todoName: string, todoDate: string) => {
-    const newItems = [...todoItems, { name: todoName, dueDate: todoDate }];
-    setTodoItems(newItems);
+    setTodoItems((currnItems) => [
+      { name: todoName, dueDate: todoDate },
+      ...currnItems,
+    ]);
   };
   const handleDelete = (todoName: string) => {
     const newItems = todoItems.filter(
-      (item: { name: string; dueDate: string }) => item.name !== todoName
+      (item: typeTodo) => item.name !== todoName
     );
     setTodoItems(newItems);
   };
