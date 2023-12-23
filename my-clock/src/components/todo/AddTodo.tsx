@@ -1,9 +1,7 @@
-import { useRef } from "react";
-type addTodoProp = {
-  onAddTodo: (todoName: string, todoDate: string) => void;
-};
+import { useContext, useRef } from "react";
+import { TodoItemsContext } from "../../store/TodoItemsContext";
 
-function AddTodo({ onAddTodo }: addTodoProp) {
+function AddTodo() {
   const todoNameElement = useRef<HTMLInputElement>(null!);
   const dueDateElement = useRef<HTMLInputElement>(null!);
 
@@ -13,8 +11,10 @@ function AddTodo({ onAddTodo }: addTodoProp) {
     const todoDate = dueDateElement.current.value;
     dueDateElement.current.value = "";
     todoNameElement.current.value = "";
-    onAddTodo(todoName, todoDate);
+    addNewItem(todoName, todoDate);
   };
+  const { addNewItem } = useContext(TodoItemsContext);
+
   return (
     <>
       <div className="container">

@@ -6,6 +6,7 @@ import ClockHeading from "./components/ClockHeading";
 import HealthyFood from "./components/HealthyFood";
 import Todo from "./components/todo/Todo";
 import Calculator from "./components/calculator/Calculator";
+import Fetch from "./components/fetch-api/Fetch";
 function App() {
   return (
     <>
@@ -19,6 +20,9 @@ function App() {
       <hr className="my-5" />
 
       <Calculator />
+
+      <hr className="my-5" />
+      <Fetch />
 
       <hr className="my-5" />
     </>
