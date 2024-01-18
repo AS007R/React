@@ -1,10 +1,22 @@
+import { useEffect, useState } from "react";
+
 const Time = () => {
-  const currTime = new Date();
+  const [time, setTime] = useState(new Date());
+
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     setTime(new Date());
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(intervalId);
+  //   };
+  // }, []);
+
   return (
     <p>
       The current time is:{" "}
       <span className="text-danger-emphasis fw-bold ">
-        {currTime.toLocaleDateString()} -- {currTime.toLocaleTimeString()}
+        {time.toLocaleDateString()} -- {time.toLocaleTimeString()}
       </span>
     </p>
   );

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type post = {
   id: number;
@@ -10,47 +10,22 @@ type post = {
 };
 
 const Post = () => {
-  const [posts, setPosts] = useState<post[]>([
-    {
-      id: 1,
-      title: "His mother had always taught him",
-      body: "His mother had always taught him not to ever think of himself as better than others. He'd tried to live by this motto. He never looked down on those who were less fortunate or who had less money than him. But the stupidity of the group of people he was talking to made him change his mind.",
-      userId: 9,
-      tags: ["history", "american", "crime"],
-      reactions: 2,
-    },
-    {
-      id: 2,
-      title: "His mother had always taught him",
-      body: "His mother had always taught him not to ever think of himself as better than others. He'd tried to live by this motto. He never looked down on those who were less fortunate or who had less money than him. But the stupidity of the group of people he was talking to made him change his mind.",
-      userId: 9,
-      tags: ["history", "american", "crime"],
-      reactions: 2,
-    },
-    {
-      id: 3,
-      title: "His mother had always taught him",
-      body: "His mother had always taught him not to ever think of himself as better than others. He'd tried to live by this motto. He never looked down on those who were less fortunate or who had less money than him. But the stupidity of the group of people he was talking to made him change his mind.",
-      userId: 9,
-      tags: ["history", "american", "crime"],
-      reactions: 2,
-    },
-    {
-      id: 4,
-      title: "His mother had always taught him",
-      body: "His mother had always taught him not to ever think of himself as better than others. He'd tried to live by this motto. He never looked down on those who were less fortunate or who had less money than him. But the stupidity of the group of people he was talking to made him change his mind.",
-      userId: 9,
-      tags: ["history", "american", "crime"],
-      reactions: 2,
-    },
-  ]);
+  const [posts, setPosts] = useState<post[]>([]);
+  const controler = new AbortController();
+  const signal = controler.signal;
+  useEffect(() => {
+    fetch("https://dummyjson.com/posts", { signal })
+      .then((res) => res.json())
+      .then((data) => setPosts(data.posts));
 
-  // fetch("https://dummyjson.com/posts")
-  //   .then((res) => res.json())
-  //   .then((data) => setPosts(data.posts));
-  //  currently getting error in fetching data "too many request error"
+    return () => {
+      controler.abort();
+    };
+  }, []);
+
   return (
     <>
+      {posts.length == 0 && <h3>Fetching posts for you... </h3>}
       {posts.map((item) => (
         <div key={item.id} className="modal-content rounded-4 shadow p-3 w-25">
           <div className="modal-header border-bottom-0">
